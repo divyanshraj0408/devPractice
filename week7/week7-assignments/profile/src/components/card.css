@@ -1,0 +1,30 @@
+.backgroundImage {
+  position: relative;
+  background-size: cover;
+  max-width: 100%;
+  min-width: 10rem;
+  height: 20rem;
+  /* min-width: auto; */
+}
+.profileCard {
+  /* display: inline-block; */
+  border: 2px solid black;
+  position: relative;
+  overflow: hidden;
+  /* height: 300px; */
+}
+
+.profilePic {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  border-radius: 50%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.statsInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

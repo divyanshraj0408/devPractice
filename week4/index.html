@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="input-el-1" oninput="sumfn()"/>
+    <input type="number" id="input-el-2" oninput="sumfn()"/>
+    <!-- <button onclick="sumfn()">Sum</button> -->
+    <div class="finalSum" id="finalSum"></div>
+  </body>
+  <script>
+    const sumfn = async() => {
+      const ip1 = document.getElementById("input-el-1").value;
+      const ip2 = document.getElementById("input-el-2").value;
+      const finalSum = document.getElementById("finalSum");
+      const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${ip1}&b=${ip2}`);
+      const sum = await response.text();
+      finalSum.innerText = `sum : ${parseFloat(sum)}`;
+    };
+  </script>
+</html>

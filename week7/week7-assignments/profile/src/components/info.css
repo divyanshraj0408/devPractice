@@ -1,0 +1,10 @@
+.info {
+  text-align: center;
+  margin-top: 50px;
+}
+.info-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
