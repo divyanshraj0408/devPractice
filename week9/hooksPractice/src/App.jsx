@@ -1,52 +1,26 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
-function useTodos(n) {
-  const [todos, setTodos] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
-    const value = setInterval(() => {
-      axios.get("https://sum-server.100xdevs.com/todos").then((res) => {
-        setTodos(res.data.todos);
-        setLoading(false);
-      });
-    }, n * 1000);
-    axios.get("https://sum-server.100xdevs.com/todos").then((res) => {
-      setTodos(res.data.todos);
-      setLoading(false);
-    });
-    return () => {
-      clearInterval(value);
-    };
-  }, [n]);
+    const timerId = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-  return { todos, loading };
+    return () => clearTimeout(timerId);
+  }, [value]);
+
+  return debouncedValue;
 }
 
 function App() {
-  const { todos, loading } = useTodos(5);
-  if (loading) {
-    return <>loading...</>;
-  }
+  const [value, setValue] = useState(0);
+  const debouncedValue = useDebounce(value, 200);
   return (
     <>
-      {todos.map((todo) => (
-        <Track todo={todo} />
-      ))}
+      Debounced value is {debouncedValue}
+      <input type="text" onChange={(e) => setValue(e.target.value)} />
     </>
   );
 }
-
-function Track({ todo }) {
-  return (
-    <div>
-      {todo.title}
-      <br />
-      {todo.description}
-    </div>
-  );
-}
-
 export default App;
